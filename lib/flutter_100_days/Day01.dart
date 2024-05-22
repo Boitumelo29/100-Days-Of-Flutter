@@ -88,7 +88,7 @@ class Assignment1 {
       print("the number is an odd number");
     }
   }
-  
+
 //handle a division by zero error with try catch block
   void tryCatchAssignment() {
     try {

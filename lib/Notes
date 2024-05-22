@@ -1,0 +1,23 @@
+the tutorial link https://www.geeksforgeeks.org/flutter-tutorial/?ref=header_search
+
+Flutter is a google mobile SDK(Software development kit: a set of tools for third-party developers to use in producing applications using a particular framework)
+to build a single codebase for both ios and android/ it is cross platform.
+
+Everything in flutter is build on a widget/is a widget.
+A widget is used to create the ui in the flutter framework.
+The types of widgets:
+ -Stateless Widgets: Does not maintain the state of the widget after a hot reload etc..
+ -Stateful Widget: maintains the state of the widget after a hot reload etc..
+
+
+The biggest selling point of flutter tech is:
+ -High-performance
+ -Expressive and flexible UI
+ - Fats development and hot reloading
+
+
+link: https://www.geeksforgeeks.org/flutter-architecture-application/?ref=next_article
+ Widgets:
+ -primary components
+ -
+
