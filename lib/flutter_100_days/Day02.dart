@@ -36,9 +36,42 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
-      child: Column(children: []),
-    ));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(appTitle),
+        backgroundColor: Colors.pink,
+      ),
+      body: const Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text("Hello world this is day 2"),
+          Text("We are learing about drawers")
+        ]),
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.pink,
+        child: ListView(
+          children: const [
+            DrawerHeader(
+              child: UserAccountsDrawerHeader(
+                accountName: Text("Boitumelo"),
+                accountEmail: Text("tumi@gmail.com"),
+              ),
+            ),
+            ListTile(
+              title: Text("Edit profile"),
+            ),
+            ListTile(
+              title: Text("Edit profile"),
+            ),
+            ListTile(
+              title: Text("Edit profile"),
+            ),
+            ListTile(
+              title: Text("Edit profile"),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
