@@ -21,3 +21,4 @@ link: https://www.geeksforgeeks.org/flutter-architecture-application/?ref=next_a
  -primary components
  -
 
+hashCode: Some  sort of generated value used to store data
