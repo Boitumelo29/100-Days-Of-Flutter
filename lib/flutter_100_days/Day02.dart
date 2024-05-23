@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter100days/main.dart';
 
 //Day 2 is on creating a drawer,
 //Drawer widget is used tp provide access to different destionations in the application.
@@ -12,7 +13,26 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final appTitle = "Flutter Day 2";
-  const MyApp({super.key});
+
+  //this is the constuctor of MyApp,
+  // the Explanation https://stackoverflow.com/questions/52056035/myhomepagekey-key-this-title-superkey-key-in-flutter-what-would-b
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: appTitle,
+      home: MyHomePage(
+        appTitle: appTitle,
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  final String appTitle;
+  const MyHomePage({Key? key, required this.appTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
