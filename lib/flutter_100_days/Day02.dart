@@ -61,13 +61,10 @@ class MyHomePage extends StatelessWidget {
               title: Text("Edit profile"),
             ),
             ListTile(
-              title: Text("Edit profile"),
+              title: Text("Add bank account"),
             ),
             ListTile(
-              title: Text("Edit profile"),
-            ),
-            ListTile(
-              title: Text("Edit profile"),
+              title: Text("Add relatives"),
             ),
           ],
         ),
