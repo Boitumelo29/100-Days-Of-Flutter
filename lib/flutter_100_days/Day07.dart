@@ -13,22 +13,23 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Progress indicator"),
         ),
-        body: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            CircularProgressIndicator(
-              color: Colors.pink,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            LinearProgressIndicator(
-              color: Colors.pink,
-              value: 80,
-              valueColor: AlwaysStoppedAnimation(Colors.white24),
-            )
-          ],
+        body: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(
+                color: Colors.pink,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              LinearProgressIndicator(
+                value: 0.8,
+              )
+            ],
+          ),
         ),
       ),
     );
