@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() => runApp(const MyListApp());
 
@@ -27,6 +28,31 @@ class MyListApp extends StatelessWidget {
               ListTile(
                 title: Text("LogOut"),
               )
+            ],
+          ),
+        ),
+        body: Container(
+          margin: const EdgeInsets.symmetric(vertical: 20.0),
+
+          /// we added a listview with containers, we then defined that list and stated that the list is going to contain widgets
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              Container(
+                height: 200,
+                width: 200,
+                color: Colors.red,
+              ),
+              Container(
+                height: 200,
+                width: 200,
+                color: Colors.pink,
+              ),
+              Container(
+                height: 200,
+                width: 200,
+                color: Colors.black,
+              ),
             ],
           ),
         ),
