@@ -15,12 +15,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final String title;
   const HomePage({super.key, required this.title});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    List<int> data = [];
+    int currentLength = 0;
+
+    final int increment = 10;
+    bool isLoading = false;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 1,
+        title: Text(widget.title),
+      ),
+    );
   }
 }
