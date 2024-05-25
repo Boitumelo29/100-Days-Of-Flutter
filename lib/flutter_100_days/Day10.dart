@@ -79,6 +79,20 @@ class DemoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Text("The position is $position"),
+          const SizedBox(),
+          const Text("GeeksforGeeks.org was created with a goal "
+              "in mind to provide well written, well "
+              "thought and well explained solutions for selected"
+              " questions. The core team of five super geeks"
+              " constituting of technology lovers and computer"
+              " science enthusiasts have been constantly working"
+              " in this direction .")
+        ],
+      ),
+    );
   }
 }
