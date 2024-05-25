@@ -2,6 +2,13 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
+
+import 'dart:math' as math;
+
+import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 void main() => runApp(MyApp());
 
@@ -44,7 +51,7 @@ class HomePage extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(33),
         alignment: FractionalOffset.bottomLeft,
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[],
         ),
@@ -52,7 +59,45 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _buildHero(
+      BuildContext context, String imageName, String description) {
+    return Container(
+      width: kMinRadius * 3,
+      height: kMinRadius * 3,
+      // child: Hero(
+      //   createRectTween: _createRectTween,
+      //   tag: imageName,
+      //   child: RadicalExpansion(),),
+    );
+  }
+
   static RectTween _createRectTween(Rect begin, Rect end) {
     return MaterialRectCenterArcTween(begin: begin, end: end);
+  }
+}
+
+class Photo extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final VoidCallback onTap;
+  const Photo(
+      {super.key,
+      required this.color,
+      required this.icon,
+      required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Theme.of(context).primaryColor.withOpacity(0.25),
+      child: InkWell(
+        onTap: onTap,
+        child: LayoutBuilder(
+          builder: (context, index) {
+            return Icon(icon);
+          },
+        ),
+      ),
+    );
   }
 }
