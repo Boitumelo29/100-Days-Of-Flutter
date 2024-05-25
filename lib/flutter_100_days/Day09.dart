@@ -56,7 +56,39 @@ class HomePage extends StatelessWidget {
                         decoration: BoxDecoration(color: Colors.grey[300]),
                       ),
                     ),
-                    Column(children: <Widget>[])
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 15.0, bottom: 5.0),
+                          child: SkeletonAnimation(
+                            child: Container(
+                              height: 15,
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 15.0, bottom: 5.0),
+                          child: SkeletonAnimation(
+                            child: Container(
+                              height: 15,
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
