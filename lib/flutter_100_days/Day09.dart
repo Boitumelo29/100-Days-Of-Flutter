@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           itemCount: 5,
           itemBuilder: (context, index) {
-            Padding(
+            return Padding(
               padding: const EdgeInsets.all(8),
               child: Container(
                 width: 70,
@@ -44,7 +44,21 @@ class HomePage extends StatelessWidget {
                       Radius.circular(8),
                     ),
                     color: Colors.white70),
-                child: Text("testing"),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SkeletonAnimation(
+                      child: Container(
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(color: Colors.grey[300]),
+                      ),
+                    ),
+                    Column(children: <Widget>[])
+                  ],
+                ),
               ),
             );
           },
