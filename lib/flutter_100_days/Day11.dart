@@ -51,9 +51,13 @@ class HomePage extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(33),
         alignment: FractionalOffset.bottomLeft,
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[],
+          children: <Widget>[
+            _buildHero(context, Icons.abc, "first"),
+            _buildHero(context, Icons.abc, "second"),
+            _buildHero(context, Icons.abc, "third")
+          ],
         ),
       ),
     );
