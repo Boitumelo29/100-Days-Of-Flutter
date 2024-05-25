@@ -60,29 +60,92 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildHero(
-      BuildContext context, String imageName, String description) {
+      BuildContext context, IconData imageName, String description) {
     return Container(
       width: kMinRadius * 3,
       height: kMinRadius * 3,
-      // child: Hero(
-      //   createRectTween: _createRectTween,
-      //   tag: imageName,
-      //   child: RadicalExpansion(),),
+      child: Hero(
+        createRectTween: _createRectTween,
+        tag: imageName,
+        child: RadicalExpansion(
+          maxRadius: kMaxRadius,
+          child: Photo(
+            icon: imageName,
+            onTap: () {
+              Navigator.of(context).push(PageRouteBuilder<void>(pageBuilder:
+                  (BuildContext context, Animation<double> animation,
+                      Animation<double> secondaryAnimation) {
+                return AnimatedBuilder(
+                    animation: animation,
+                    builder: (context, child) {
+                      return Opacity(
+                          opacity: opacityCurve.transform(animation.value),
+                          child: _buildPage(
+                            context,
+                            imageName,
+                            description,
+                          ));
+                    });
+              }));
+            },
+          ),
+        ),
+      ),
     );
   }
 
-  static RectTween _createRectTween(Rect begin, Rect end) {
+  static Widget _buildPage(
+      BuildContext context, IconData imageName, String description) {
+    return Container(
+      color: Theme.of(context).canvasColor,
+      child: Center(
+        child: Card(
+          elevation: 8.0,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: kMaxRadius * 2.0,
+                height: kMaxRadius * 2.0,
+                child: Hero(
+                  createRectTween: _createRectTween,
+                  tag: imageName,
+                  child: RadicalExpansion(
+                    maxRadius: kMaxRadius,
+                    child: Photo(
+                      icon: imageName,
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              Text(
+                description,
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 3.0,
+              ),
+              const SizedBox(height: 20.0),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static RectTween _createRectTween(Rect? begin, Rect? end) {
     return MaterialRectCenterArcTween(begin: begin, end: end);
   }
 }
 
 class Photo extends StatelessWidget {
   final IconData icon;
-  final Color color;
+  // final Color color;
   final VoidCallback onTap;
   const Photo(
       {super.key,
-      required this.color,
+      //required this.color,
       required this.icon,
       required this.onTap});
 
@@ -96,6 +159,34 @@ class Photo extends StatelessWidget {
           builder: (context, index) {
             return Icon(icon);
           },
+        ),
+      ),
+    );
+  }
+}
+
+class RadicalExpansion extends StatelessWidget {
+  const RadicalExpansion({
+    Key? key,
+    required this.maxRadius,
+    required this.child,
+  })  : clipRectSize = 2.0 * (maxRadius / math.sqrt2),
+        super(key: key);
+
+  final double maxRadius;
+  final clipRectSize;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Center(
+        child: SizedBox(
+          height: clipRectSize,
+          width: clipRectSize,
+          child: ClipRect(
+            child: child,
+          ),
         ),
       ),
     );
