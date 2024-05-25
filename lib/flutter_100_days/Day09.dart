@@ -40,10 +40,11 @@ class HomePage extends StatelessWidget {
                 width: 70,
                 height: 70,
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                    color: Colors.white70),
+                child: Text("testing"),
               ),
             );
           },
