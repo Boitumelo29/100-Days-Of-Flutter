@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,10 +27,22 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                width: 70,
+                height: 70,
+                decoration: const BoxDecoration(color: Colors.pink),
+              ),
+            );
+          },
         ),
       ),
     );
