@@ -2,13 +2,8 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 
 import 'dart:math' as math;
-
-import 'package:flutter/cupertino.dart';
-
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 void main() => runApp(MyApp());
 
