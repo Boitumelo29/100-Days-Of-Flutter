@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 void main() => runApp(const MyApp());
 
@@ -59,6 +60,25 @@ class _HomePageState extends State<HomePage> {
         elevation: 1,
         title: Text(widget.title),
       ),
+      body: LazyLoadScrollView(
+        isLoading: isLoading,
+        onEndOfPage: () => loadMore(),
+        child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return DemoItem(position: index);
+            }),
+      ),
     );
+  }
+}
+
+class DemoItem extends StatelessWidget {
+  final int position;
+  const DemoItem({super.key, required this.position});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

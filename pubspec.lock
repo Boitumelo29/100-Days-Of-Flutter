@@ -70,6 +70,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_lazy_loader:
+    dependency: "direct main"
+    description:
+      name: flutter_lazy_loader
+      sha256: "58e6861fece863593068c4fa9e9551fb56cb7b133c912b27227496d8c45c7f7b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -91,6 +99,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  lazy_load_scrollview:
+    dependency: "direct main"
+    description:
+      name: lazy_load_scrollview
+      sha256: "230c827d6f7ec5e461f0674ef332daae2f78190bf1e4cd84977e51de04b231e3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
   leak_tracker:
     dependency: transitive
     description:
