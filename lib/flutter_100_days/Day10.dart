@@ -32,6 +32,28 @@ class _HomePageState extends State<HomePage> {
     final int increment = 10;
     bool isLoading = false;
 
+    Future<void> loadMore() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      await Future.delayed(const Duration(seconds: 2));
+      for (var i = 0; i <= currentLength + increment; i++) {
+        data.add(i);
+      }
+
+      setState(() {
+        isLoading = false;
+        currentLength = data.length;
+      });
+    }
+
+    @override
+    void initState() {
+      loadMore();
+      super.initState();
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
