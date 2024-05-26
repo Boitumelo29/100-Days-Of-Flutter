@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//Lottie is a JSON-based animation file,
+//enables developers to add high-quality animations to their UI with small file sizes and without the need for multiple assets or complex animation code
+
 class HomePage extends StatefulWidget {
   final String title;
   const HomePage({super.key, required this.title});
