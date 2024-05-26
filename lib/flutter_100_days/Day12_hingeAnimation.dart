@@ -27,14 +27,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _rotationAnimation;
-  Animation<double> _slideAnimation;
-  Animation<double> _opacityAnimation;
+
+
+  late AnimationController _controller;
+  late Animation _rotationAnimation;
+  late Animation<double> _slideAnimation;
+  late Animation<double> _opacityAnimation;
 
   @override
   void initState() {
     super.initState();
+
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 200));
+
+        _rotationAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(parent: _controller, curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)))
+        
   }
 
   @override
