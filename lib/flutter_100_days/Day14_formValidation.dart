@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//Form provides us a convenient way to validate user Inputs
+//hecks the condition which is given in the validator function
 class HomePage extends StatefulWidget {
   final String title;
   const HomePage({super.key, required this.title});
@@ -24,7 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   var isLoading = false;
 
   void _submit() {
@@ -45,8 +47,52 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(8.0),
         child: Form(
           key: _formKey,
-          child: const Column(
-            children: <Widget>[Text("Form-Validation In Flutter")],
+          child: Column(
+            children: <Widget>[
+              const Text("Form-Validation In Flutter"),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                    label: Text("Email"), hintText: "Email"),
+                onFieldSubmitted: (value) {
+                  //print("submitted");
+                },
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value)) {
+                    return "Enter a valid email";
+                  }
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                    label: Text("Password"), hintText: "Password"),
+                onFieldSubmitted: (value) {
+                  //print("submitted");
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter a valid Password";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    _submit();
+                  },
+                  child: const Text("Login"))
+            ],
           ),
         ),
       ),
