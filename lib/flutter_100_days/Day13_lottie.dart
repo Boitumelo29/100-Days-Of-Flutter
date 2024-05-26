@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 void main() => runApp(const MyApp());
 
@@ -29,6 +30,23 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Lottie.network(
+                'https://assets1.lottiefiles.com/private_files/lf30_QLsD8M.json',
+                height: 200.0,
+                repeat: true,
+                animate: true),
+            Lottie.network(
+                'https://assets1.lottiefiles.com/private_files/lf30_yQtj4O.json',
+                height: 200.0,
+                repeat: true,
+                animate: true),
+          ],
+        ),
       ),
     );
   }
