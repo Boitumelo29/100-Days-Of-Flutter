@@ -27,10 +27,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-
-
+//In Dart, the late keyword is used to declare a non-nullable variable that will be initialized after its declaration but before it is used for the first time.
   late AnimationController _controller;
-  late Animation _rotationAnimation;
+  late Animation rotationAnimation;
   late Animation<double> _slideAnimation;
   late Animation<double> _opacityAnimation;
 
@@ -38,10 +37,20 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
 
-    _controller = AnimationController(vsync: this, duration: Duration(seconds: 200));
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 200));
 
-        _rotationAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(parent: _controller, curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)))
-        
+    rotationAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(
+        parent: _controller,
+        curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)));
+
+    _slideAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(
+        parent: _controller,
+        curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)));
+
+    _opacityAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(
+        parent: _controller,
+        curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)));
   }
 
   @override
