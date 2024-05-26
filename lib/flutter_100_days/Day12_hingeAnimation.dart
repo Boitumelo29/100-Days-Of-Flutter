@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hinge Animation"),
+        title: Text(widget.title),
       ),
       body: AnimatedBuilder(
         animation: slideAnimation,
