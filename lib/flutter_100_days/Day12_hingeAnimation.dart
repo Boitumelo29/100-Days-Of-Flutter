@@ -5,8 +5,11 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  final String title = "Hinge Animation";
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
