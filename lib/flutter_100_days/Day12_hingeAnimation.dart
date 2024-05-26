@@ -30,27 +30,34 @@ class _HomePageState extends State<HomePage>
 //In Dart, the late keyword is used to declare a non-nullable variable that will be initialized after its declaration but before it is used for the first time.
   late AnimationController _controller;
   late Animation rotationAnimation;
-  late Animation<double> _slideAnimation;
-  late Animation<double> _opacityAnimation;
+  late Animation<double> slideAnimation;
+  late Animation<double> opacityAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 200));
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(seconds: 200));
 
     rotationAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(
         parent: _controller,
-        curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)));
+        curve: const Interval(curve: Curves.bounceOut, 0.0, 0.5)));
 
-    _slideAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(
+    slideAnimation = Tween(begin: 100.0, end: 600.0).animate(CurvedAnimation(
         parent: _controller,
-        curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)));
+        curve: const Interval(curve: Curves.fastOutSlowIn, 0.5, 0.1)));
 
-    _opacityAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(
+    opacityAnimation = Tween(end: 0.15, begin: 0.0).animate(CurvedAnimation(
         parent: _controller,
-        curve: Interval(curve: Curves.bounceOut, 0.0, 0.5)));
+        curve: const Interval(curve: Curves.fastOutSlowIn, 0.5, 0.1)));
+  }
+
+//Called when this object is removed from the tree permanently.
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
