@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -122,8 +120,7 @@ class HomePage extends StatelessWidget {
               ),
               Text(
                 description,
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 3.0,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20.0),
             ],
