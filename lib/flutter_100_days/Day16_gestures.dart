@@ -36,6 +36,14 @@ class HomePage extends StatelessWidget {
                   SnackBar(content: Text("You have tapped on the button"));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.pink,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text("Tap Button"),
+            ),
           ),
         ),
       ),
