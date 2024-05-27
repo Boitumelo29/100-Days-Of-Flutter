@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    key: _formKey,
                     decoration: const InputDecoration(
                       hintText: "Email",
                       label: Text("Email"),
@@ -59,6 +60,7 @@ class _HomePageState extends State<HomePage> {
                     height: 10,
                   ),
                   TextFormField(
+                    key: _formKey,
                     decoration: const InputDecoration(
                       hintText: "Password",
                       label: Text("Password"),
