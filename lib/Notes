@@ -27,3 +27,10 @@ to duplicate: press option, shift and down
 
 
 **void main defines the main() method that will run automatically, when the application is launched.
+
+The diffence between async and async*
+ async is for functions that perform asynchronous operations and return a single result, while async* is for functions that generate multiple results over time in an asynchronous manner
+
+Short Answer:
+async gives you a futer
+async* gives you a stream

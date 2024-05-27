@@ -15,12 +15,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//url launcher: Flutter plugin for launching a URL. Supports web, phone, SMS, and email schemes.
+// you can open the url in the browser or in the app:
+
 class HomePage extends StatelessWidget {
   final String title;
   const HomePage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+    );
   }
+
+  _launchURLBrowser() async {}
 }
