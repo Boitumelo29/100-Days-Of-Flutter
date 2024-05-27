@@ -24,3 +24,6 @@ link: https://www.geeksforgeeks.org/flutter-architecture-application/?ref=next_a
 hashCode: Some  sort of generated value used to store data
 
 to duplicate: press option, shift and down
+
+
+**void main defines the main() method that will run automatically, when the application is launched.
