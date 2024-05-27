@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
       if (await canLaunchUrl(url)) {
         await launchUrl(url);
       } else {
-        var snackBar = SnackBar(content: Text("could not launch url"));
+        var snackBar = const SnackBar(content: Text("could not launch url"));
 
         throw ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
       if (await canLaunchUrl(url)) {
         await launchUrl(url);
       } else {
-        var snackBar = SnackBar(content: Text("could not launch url"));
+        var snackBar = const SnackBar(content: Text("could not launch url"));
 
         throw ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
