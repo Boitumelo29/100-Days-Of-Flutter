@@ -28,8 +28,14 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Container(
+          height: 200,
+          width: 200,
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              const snackBar =
+                  SnackBar(content: Text("You have tapped on the button"));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
           ),
         ),
       ),
