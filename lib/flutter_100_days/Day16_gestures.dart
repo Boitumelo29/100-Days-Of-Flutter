@@ -5,8 +5,34 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  final String title = "Gesture Example";
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(title: title),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  final String title;
+  const HomePage({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Container(
+          child: GestureDetector(
+            onTap: () {},
+          ),
+        ),
+      ),
+    );
   }
 }
