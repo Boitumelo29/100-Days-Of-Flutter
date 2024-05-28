@@ -73,3 +73,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+// we are creating the album class, 
+class Album {
+  final int id;
+  final String title;
+
+  Album({required this.id, required this.title});
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(id: json['id'], title: json["title"]);
+  }
+}
+
+Future
