@@ -72,8 +72,22 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Future<Album> fetchAlbum() async {
+    var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      return Album.fromJson(json.decode(response.body));
+    } else {
+      var snackBar = const SnackBar(content: Text("an error has occured"));
+      ScaffoldMessenger(child: snackBar);
+      throw Exception("Loading album failed");
+    }
+  }
 }
-// we are creating the album class, 
+
+// we are creating the album class,
 class Album {
   final int id;
   final String title;
@@ -83,5 +97,3 @@ class Album {
     return Album(id: json['id'], title: json["title"]);
   }
 }
-
-Future
