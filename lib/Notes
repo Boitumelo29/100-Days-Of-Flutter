@@ -34,3 +34,5 @@ The diffence between async and async*
 Short Answer:
 async gives you a futer
 async* gives you a stream
+
+The “final” keyword is used to declare variables whose values cannot be changed once assigned.
