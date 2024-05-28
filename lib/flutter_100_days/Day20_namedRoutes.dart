@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         "/": (context) => HomePage(title: title),
-        "/second": (context) => SecondPage()
+        "/second": (context) => const SecondPage()
       },
     );
   }
@@ -33,7 +33,9 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           child: const Text("Launch Screen"),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, "/second");
+          },
         ),
       ),
     );
