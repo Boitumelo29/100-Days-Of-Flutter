@@ -9,9 +9,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: HomePage(title: title));
+        onGenerateRoute: (settings) {
+          if (settings.name == PassArgumentScreen.routeName) {}
+        },
+        debugShowCheckedModeBanner: false,
+        home: HomePage(title: title));
   }
 }
+
+//In flutter we use: Navigator.
+// an example is: Navigator.pushNamed()
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -23,8 +30,12 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class PassArgumentScreen extends StatelessWidget {
+  static const routeName = '/passArguments';
+  final String title;
+  final String message;
+  const PassArgumentScreen(
+      {super.key, required this.message, required this.title});
 
   @override
   Widget build(BuildContext context) {
