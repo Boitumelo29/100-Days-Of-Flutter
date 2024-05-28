@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,6 +38,40 @@ class _HomePageState extends State<HomePage> {
       },),
     );
   }
+
+  Future<Album> fetchAlbum()async{
+
+    var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      return Album.fromJson(jsonDecode(response.body,),);
+    }else{
+      var snackBar = const SnackBar(content: Text("An error has occured"));
+      throw ScaffoldMessenger(child: snackBar);
+    }
+
+  }
+}
+
+Future<Album> update(String title)async{
+  var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+  final response = http.get(Uri.parse(uri), headers: <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8'
+  } b,);
+
+  if (response.statusCode == 200) {
+   return Album.fromJson(jsonDecode(response.body));
+  }else{
+    throw "an error has occured";
+  }
+}
+
+Future<Album> deleteAlbum(String id) async{
+  var uri = 'https://jsonplaceholder.typicode.com/albums/$id';
+  final response = http.delete(Uri.parse(uri));
+
+
 }
 
 
