@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          //title: Text(widget.title),
-          ),
+        title: Text(widget.title),
+      ),
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(8),
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    //  Text(snapshot.data!.title),
+                    Text(snapshot.data!.title),
                     TextField(
                       controller: _controller,
                       decoration: const InputDecoration(hintText: "Enter Text"),
