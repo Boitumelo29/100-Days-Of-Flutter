@@ -31,6 +31,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _controller = TextEditingController();
+  late Future<Album> _futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+    // _futureAlbum = getAlbum();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(snapshot.data.title),
+                    Text(snapshot.data!.title),
                     TextField(
                       controller: _controller,
                       decoration:
@@ -58,7 +66,10 @@ class _HomePageState extends State<HomePage> {
                       height: 10,
                     ),
                     ElevatedButton(
-                        onPressed: () {}, child: const Text("Update data"))
+                        onPressed: () {
+                          setState(() {});
+                        },
+                        child: const Text("Update data"))
                   ],
                 );
               } else if (snapshot.hasError) {
