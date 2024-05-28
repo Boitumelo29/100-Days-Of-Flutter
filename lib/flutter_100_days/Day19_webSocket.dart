@@ -81,8 +81,19 @@ class _HomePageState extends State<HomePage> {
       return Album.fromJson(json.decode(response.body));
     } else {
       var snackBar = const SnackBar(content: Text("an error has occured"));
-      ScaffoldMessenger(child: snackBar);
-      throw Exception("Loading album failed");
+      throw ScaffoldMessenger(child: snackBar);
+    }
+  }
+
+  Future<Album> updateAlbum() async {
+    var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      return Album.fromJson(json.decode(response.body));
+    } else {
+      var snackBar = const SnackBar(content: Text("an error has occured"));
+      throw ScaffoldMessenger(child: snackBar);
     }
   }
 }
