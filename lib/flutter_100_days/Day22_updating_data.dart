@@ -28,6 +28,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _controller = TextEditingController();
+  late Future<Album> _futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureAlbum = fetchAlbum();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           future: _futureAlbum,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.data) {
+              if (snapshot.hasData) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -85,11 +93,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<Album> updateAlbum() async {
+  Future<Album> updateAlbum(String title) async {
     const String uri = 'https://jsonplaceholder.typicode.com/albums/1';
-    final response = await http.put(Uri.parse(uri), headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8'
-    });
+    final response = await http.put(Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{'title': title}));
 
     if (response.statusCode == 200) {
       return Album.fromJson(jsonDecode(response.body));
