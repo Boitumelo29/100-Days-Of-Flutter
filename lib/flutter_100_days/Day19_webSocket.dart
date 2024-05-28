@@ -61,6 +61,9 @@ class _HomePageState extends State<HomePage> {
                         onPressed: () {}, child: const Text("Update data"))
                   ],
                 );
+              } else if (snapshot.hasError) {
+                var snackBar = SnackBar(content: Text("${snapshot.error}"));
+                return ScaffoldMessenger(child: snackBar);
               }
             }
             return const CircularProgressIndicator();
