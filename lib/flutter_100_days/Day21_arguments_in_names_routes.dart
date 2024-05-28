@@ -39,12 +39,27 @@ class PassArgumentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Text(message),
+      ),
+    );
   }
 }
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
+class Arguments {
+  final String titleBar;
+  final String textMessage;
+
+  Arguments({required this.titleBar, required this.textMessage});
+}
+
+class ExtractArgumentScreen extends StatelessWidget {
+  //static const routeName = ''
+  const ExtractArgumentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
