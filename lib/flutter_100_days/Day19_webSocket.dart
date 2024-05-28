@@ -67,7 +67,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          setState(() {});
+                          setState(() {
+                            _futureAlbum = updateAlbum(_controller.text);
+                          });
                         },
                         child: const Text("Update data"))
                   ],
