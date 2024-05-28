@@ -35,6 +35,7 @@ class HomePage extends StatelessWidget {
           child: const Text("Launch Screen"),
           onPressed: () {
             Navigator.pushNamed(context, "/second");
+            // Navigator.push(context, MaterialPageRoute(builder: (context)=> SecondPage()));
           },
         ),
       ),
