@@ -85,9 +85,16 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<Album> updateAlbum() async {
+  Future<Album> updateAlbum(String title) async {
     var uri = 'https://jsonplaceholder.typicode.com/albums/1';
-    final response = await http.get(Uri.parse(uri));
+    final http.Response response = await http.put(
+        Uri.parse(
+          uri,
+        ),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{'titl': title}));
 
     if (response.statusCode == 200) {
       return Album.fromJson(json.decode(response.body));
