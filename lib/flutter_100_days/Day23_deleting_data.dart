@@ -54,7 +54,21 @@ class _HomePageState extends State<HomePage> {
                   TextField(
                     controller: _controller,
                     decoration: const InputDecoration(hintText: "Enter text"),
-                  )
+                  ),
+                  const SizedBox(),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _futureAlbum == updateAlbum(_controller.text);
+                        });
+                      },
+                      child: const Text("Update")),
+                  ElevatedButton(
+                      onPressed: () {
+                        _futureAlbum ==
+                            deleteAlbum(snapshot.data!.id.toString());
+                      },
+                      child: const Text("Delete"))
                 ],
               );
             } else {
@@ -64,7 +78,7 @@ class _HomePageState extends State<HomePage> {
               return ScaffoldMessenger(child: snackBar);
             }
           }
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         },
       ),
     );
