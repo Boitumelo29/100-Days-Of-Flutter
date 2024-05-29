@@ -47,9 +47,12 @@ class _HomePageState extends State<HomePage> {
             FutureBuilder<Album>(
                 future: _fetchAlbum(),
                 builder: (context, snapshot) {
-                  return const Column(
-                    children: <Widget>[],
-                  );
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: <Widget>[Text(snapshot.data!.title)],
+                    );
+                  }
+                  return const CircularProgressIndicator();
                 })
           ],
         ),
