@@ -46,9 +46,10 @@ class _HomePageState extends State<HomePage> {
           child: FutureBuilder<News>(
             future: _futureNews,
             builder: (context, snapshot) {
+              print(snapshot.data?.title);
               if (snapshot.hasData) {
                 return Column(
-                  children: <Widget>[Text(snapshot.data!.author)],
+                  children: <Widget>[Text(snapshot.data!.title)],
                 );
               }
               return const CircularProgressIndicator();
@@ -71,22 +72,25 @@ class _HomePageState extends State<HomePage> {
 }
 
 class News {
+  final String status;
   final String author;
   final String title;
   final String description;
   final String image;
 
   News(
-      {required this.author,
+      {required this.status,
+      required this.author,
       required this.title,
       required this.description,
       required this.image});
 
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
-        author: json['"author'],
+        status: json['status'],
+        author: json['author'],
         description: json['description'],
         title: json['title'],
-        image: json['"urlToImage']);
+        image: json['urlToImage']);
   }
 }
