@@ -27,13 +27,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<Album> _fetchAlbum();
+  late Future<Album> _futureAlbum;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // _fetchAlbum = fetchAlbum();
+    _futureAlbum = _fetchAlbum();
   }
 
   @override
@@ -57,26 +56,24 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
- 
 }
 
-   Future<Album> _fetchAlbum() async {
-    var uri = 'https://jsonplaceholder.typicode.com/albums/1';
-    final response = await http.get(Uri.parse(uri));
-
-    if (response.statusCode == 200) {
-      return Album.fromJson(json.decode(response.body));
-    } else {
-      const snackBar = SnackBar(content: Text("An Error has occured"));
-      const snackBarMessage = ScaffoldMessenger(child: snackBar);
-      throw snackBarMessage;
-    }
+Future<Album> _fetchAlbum() async {
+  var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+  final response = await http.get(Uri.parse(uri));
+  if (response.statusCode == 200) {
+    return Album.fromJson(json.decode(response.body));
+  } else {
+    const snackBarMessage = SnackBar(content: Text("An Error has occured"));
+    const snackBar = ScaffoldMessenger(child: snackBarMessage);
+    throw snackBar;
   }
+}
 
-   // Future<Album> updateAlbum(String title) {
-  //   var uri = 'https://jsonplaceholder.typicode.com/albums/1';
-  //   final response = http.post(Uri.parse(uri));
-  // }
+// Future<Album> updateAlbum(String title) {
+//   var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+//   final response = http.post(Uri.parse(uri));
+//  }
 
 class Album {
   final int id;
