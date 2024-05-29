@@ -27,27 +27,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future<News> _futureNews;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _futureNews = _fetchNews();
+  }
+
   @override
   Widget build(BuildContext context) {
-    fetchNews();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Center(
+          child: FutureBuilder<News>(
+            future: _futureNews,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: <Widget>[Text(snapshot.data!.author)],
+                );
+              }
+              return const CircularProgressIndicator();
+            },
+          ),
+        ));
   }
-}
 
-Future<News> fetchNews() async {
-  var uri =
-      'https://newsapi.org/v2/everything?q=tesla&from=2024-04-29&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca';
-  final response = await http.get(Uri.parse(uri));
+  Future<News> _fetchNews() async {
+    var uri =
+        'https://newsapi.org/v2/everything?q=tesla&from=2024-04-29&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca';
+    final response = await http.get(Uri.parse(uri));
 
-  print(response.body);
-  if (response.statusCode == 200) {
-    return News.fromJson(json.decode(response.body));
-  } else {
-    throw 'error';
+    if (response.statusCode == 200) {
+      return News.fromJson(json.decode(response.body));
+    } else {
+      throw 'error';
+    }
   }
 }
 
@@ -55,13 +74,19 @@ class News {
   final String author;
   final String title;
   final String description;
+  final String image;
 
-  News({required this.author, required this.title, required this.description});
+  News(
+      {required this.author,
+      required this.title,
+      required this.description,
+      required this.image});
 
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
         author: json['"author'],
         description: json['description'],
-        title: json['title']);
+        title: json['title'],
+        image: json['"urlToImage']);
   }
 }
