@@ -28,15 +28,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future<Album> _futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureAlbum = fetchAlbum();
+  }
+
   @override
   Widget build(BuildContext context) {
-    late Future<Album> _futureAlbum;
-    @override
-    void initState() {
-      super.initState();
-      _futureAlbum = fetchAlbum();
-    }
-
     TextEditingController _controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
