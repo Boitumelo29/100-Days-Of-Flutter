@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 void main() => runApp(const MyApp());
@@ -37,13 +38,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: FutureBuilder(
         future: _futureAlbum,
-        builder: (context, snapshot) {},
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              return Column(
+                children: <Widget>[
+                  Text(snapshot.data!.title),
+                ],
+              );
+            }
+          }
+        },
       ),
     );
   }
