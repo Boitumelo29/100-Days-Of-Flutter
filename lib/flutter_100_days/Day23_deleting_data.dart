@@ -51,10 +51,20 @@ class _HomePageState extends State<HomePage> {
               return Column(
                 children: <Widget>[
                   Text(snapshot.data!.title),
+                  TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(hintText: "Enter text"),
+                  )
                 ],
               );
+            } else {
+              var snackBar =
+                  const SnackBar(content: Text("An error has occured"));
+
+              return ScaffoldMessenger(child: snackBar);
             }
           }
+          return CircularProgressIndicator();
         },
       ),
     );
