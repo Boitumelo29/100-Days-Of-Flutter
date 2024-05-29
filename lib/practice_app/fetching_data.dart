@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(const MyApp());
 
@@ -36,6 +39,19 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<Album> fetchUpdate() async {
+    var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      return Album.fromJson(jsonDecode(response.body));
+    } else {
+      const snackBar = SnackBar(content: Text("An Error has occured"));
+      const snackBarMessage = ScaffoldMessenger(child: snackBar);
+      throw snackBarMessage;
+    }
   }
 }
 
