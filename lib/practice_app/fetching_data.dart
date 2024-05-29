@@ -27,32 +27,55 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //late Future<Album> _fetchAlbum();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _fetchAlbum = fetchAlbum();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
-          children: <Widget>[],
+          children: <Widget>[
+            FutureBuilder<Album>(
+                future: _fetchAlbum(),
+                builder: (context, snapshot) {
+                  return const Column(
+                    children: <Widget>[],
+                  );
+                })
+          ],
         ),
       ),
     );
   }
 
-  Future<Album> fetchUpdate() async {
+  Future<Album> _fetchAlbum() async {
     var uri = 'https://jsonplaceholder.typicode.com/albums/1';
     final response = await http.get(Uri.parse(uri));
 
     if (response.statusCode == 200) {
-      return Album.fromJson(jsonDecode(response.body));
+      return Album.fromJson(json.decode(response.body));
     } else {
       const snackBar = SnackBar(content: Text("An Error has occured"));
       const snackBarMessage = ScaffoldMessenger(child: snackBar);
       throw snackBarMessage;
     }
   }
+
+  // Future<Album> updateAlbum(String title) {
+  //   var uri = 'https://jsonplaceholder.typicode.com/albums/1';
+  //   final response = http.post(Uri.parse(uri));
+
+  // }
 }
 
 class Album {
