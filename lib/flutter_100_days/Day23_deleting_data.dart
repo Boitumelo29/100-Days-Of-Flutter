@@ -54,11 +54,27 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+//  Future<Album> updateAlbum(String title) async {
+//     const String uri = 'https://jsonplaceholder.typicode.com/albums/1';
+//     final response = await http.put(Uri.parse(uri),
+//         headers: <String, String>{
+//           'Content-Type': 'application/json; charset=UTF-8'
+//         },
+//         body: jsonEncode(<String, String>{'title': title}));
+
+//     if (response.statusCode == 200) {
+//       return Album.fromJson(jsonDecode(response.body));
+//     } else {
+//       var snackBar = const SnackBar(content: Text("An error has occures"));
+//       throw ScaffoldMessenger(child: snackBar);
+//     }
+//   }
+
 Future<Album> update(String title)async{
   var uri = 'https://jsonplaceholder.typicode.com/albums/1';
   final response = http.get(Uri.parse(uri), headers: <String, String>{
     'Content-Type': 'application/json; charset=UTF-8'
-  } b,);
+  } ,);
 
   if (response.statusCode == 200) {
    return Album.fromJson(jsonDecode(response.body));
