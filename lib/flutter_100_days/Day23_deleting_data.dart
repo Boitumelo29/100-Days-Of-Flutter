@@ -54,41 +54,37 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-//  Future<Album> updateAlbum(String title) async {
-//     const String uri = 'https://jsonplaceholder.typicode.com/albums/1';
-//     final response = await http.put(Uri.parse(uri),
-//         headers: <String, String>{
-//           'Content-Type': 'application/json; charset=UTF-8'
-//         },
-//         body: jsonEncode(<String, String>{'title': title}));
+ Future<Album> updateAlbum(String title) async {
+    const String uri = 'https://jsonplaceholder.typicode.com/albums/1';
+    final response = await http.put(Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{'title': title}));
 
-//     if (response.statusCode == 200) {
-//       return Album.fromJson(jsonDecode(response.body));
-//     } else {
-//       var snackBar = const SnackBar(content: Text("An error has occures"));
-//       throw ScaffoldMessenger(child: snackBar);
-//     }
-//   }
-
-Future<Album> update(String title)async{
-  var uri = 'https://jsonplaceholder.typicode.com/albums/1';
-  final response = http.get(Uri.parse(uri), headers: <String, String>{
-    'Content-Type': 'application/json; charset=UTF-8'
-  } ,);
-
-  if (response.statusCode == 200) {
-   return Album.fromJson(jsonDecode(response.body));
-  }else{
-    throw "an error has occured";
+    if (response.statusCode == 200) {
+      return Album.fromJson(jsonDecode(response.body));
+    } else {
+      var snackBar = const SnackBar(content: Text("An error has occures"));
+      throw ScaffoldMessenger(child: snackBar);
+    }
   }
-}
 
-Future<Album> deleteAlbum(String id) async{
-  var uri = 'https://jsonplaceholder.typicode.com/albums/$id';
-  final response = http.delete(Uri.parse(uri));
+Future<Album> deleteAlbum(String id) async { 
+   var uri = 'https://jsonplaceholder.typicode.com/albums/$id';
 
-
-}
+  final http.Response response = await http.delete( Uri.parse(uri), 
+    headers: <String, String>{ 
+      'Content-Type': 'application/json; charset=UTF-8', 
+    }, 
+  ); 
+  
+  if (response.statusCode == 200) { 
+    return Album.fromJson(jsonDecode(response.body)); 
+  } else { 
+    throw Exception('Item Not Deleted!'); 
+  } 
+} 
 
 
 class Album {
