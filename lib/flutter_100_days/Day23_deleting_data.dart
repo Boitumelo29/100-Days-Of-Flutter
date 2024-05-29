@@ -28,16 +28,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<Album> _futureAlbum;
-
-  @override
-  void initState() {
-    super.initState();
-    _futureAlbum = fetchAlbum();
-  }
-
   @override
   Widget build(BuildContext context) {
+    late Future<Album> _futureAlbum;
+    @override
+    void initState() {
+      super.initState();
+      _futureAlbum = fetchAlbum();
+    }
+
     TextEditingController _controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
@@ -63,10 +62,13 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       child: const Text("Update")),
+                  const SizedBox(),
                   ElevatedButton(
                       onPressed: () {
-                        _futureAlbum ==
-                            deleteAlbum(snapshot.data!.id.toString());
+                        setState(() {
+                          _futureAlbum ==
+                              deleteAlbum(snapshot.data!.id.toString());
+                        });
                       },
                       child: const Text("Delete"))
                 ],
