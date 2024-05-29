@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //late Future<Album> _fetchAlbum();
+  late Future<Album> _fetchAlbum();
 
   @override
   void initState() {
@@ -57,8 +57,10 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+ 
+}
 
-  Future<Album> _fetchAlbum() async {
+   Future<Album> _fetchAlbum() async {
     var uri = 'https://jsonplaceholder.typicode.com/albums/1';
     final response = await http.get(Uri.parse(uri));
 
@@ -71,12 +73,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // Future<Album> updateAlbum(String title) {
+   // Future<Album> updateAlbum(String title) {
   //   var uri = 'https://jsonplaceholder.typicode.com/albums/1';
   //   final response = http.post(Uri.parse(uri));
-
   // }
-}
 
 class Album {
   final int id;
