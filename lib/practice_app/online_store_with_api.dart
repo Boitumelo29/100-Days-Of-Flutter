@@ -100,7 +100,24 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Card(
+      child: Column(
+        children: <Widget>[
+          AspectRatio(
+            aspectRatio: 1,
+            child: Image.network(product.image),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            title: Text(product.title),
+            subtitle: Text(product.description),
+            trailing: Text("${product.price}"),
+          )
+        ],
+      ),
+    );
   }
 }
 
