@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // now we are initialing it
     fetchData();
@@ -40,7 +39,28 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     //fetchData();
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            return SizedBox(
+              height: 80,
+              width: 80,
+              child: ListTile(
+                leading: SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: Image.network(products[index].image),
+                ),
+                title: Text(products[index].title),
+                subtitle: Text("R${products[index].price}"),
+              ),
+            );
+          }),
+    );
   }
 
   Future<void> fetchData() async {
@@ -54,6 +74,8 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         products = jsonData.map((e) => Products.fromJson(e)).toList();
       });
+    } else {
+      //var snackBar
     }
   }
 }
@@ -78,7 +100,7 @@ class Products {
         id: json['id'],
         description: json['description'],
         image: json['image'],
-        price: json['price'],
+        price: json['price'].toDouble(),
         title: json['title']);
   }
 }
