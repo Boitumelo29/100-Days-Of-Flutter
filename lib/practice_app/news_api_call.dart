@@ -47,10 +47,11 @@ class _HomePageState extends State<HomePage> {
           child: FutureBuilder<Article>(
             future: _futureNews,
             builder: (context, snapshot) {
-              print(snapshot.data?.title);
               if (snapshot.hasData) {
+                var article = snapshot.data!;
+                print("==============${article.title}");
                 return Column(
-                  children: <Widget>[Text(snapshot.data!.title)],
+                  children: <Widget>[Text(article.title)],
                 );
               }
               return const CircularProgressIndicator();
@@ -61,12 +62,14 @@ class _HomePageState extends State<HomePage> {
 
   Future<Article> _fetchNews() async {
     var uri =
-        'https://newsapi.org/v2/everything?q=tesla&from=2024-04-29&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca';
+        "https://newsapi.org/v2/everything?q=tesla&from=2024-04-30&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca";
     final response = await http.get(Uri.parse(uri));
-
     if (response.statusCode == 200) {
       //json.decode takes json formatted string and it converts it into dart
       final jsonResponse = json.decode(response.body);
+      print("json response================${jsonResponse['articles']}");
+      print(
+          "json response for the first ================${jsonResponse['articles'][0]}");
       if (jsonResponse['articles'] != null &&
           jsonResponse['articles'].isNotEmpty) {
         return Article.fromJson(jsonResponse['articles'][0]);
