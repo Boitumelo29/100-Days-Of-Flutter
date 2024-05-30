@@ -27,11 +27,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<News> _futureNews;
+  late Future<Article> _futureNews;
 
   @override
   void initState() {
     super.initState();
+    //here we are overring and initiaising _fetchNews to = _futureNews
     _futureNews = _fetchNews();
   }
 
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           title: Text(widget.title),
         ),
         body: Center(
-          child: FutureBuilder<News>(
+          child: FutureBuilder<Article>(
             future: _futureNews,
             builder: (context, snapshot) {
               print(snapshot.data?.title);
@@ -57,35 +58,35 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  Future<News> _fetchNews() async {
+  Future<Article> _fetchNews() async {
     var uri =
         'https://newsapi.org/v2/everything?q=tesla&from=2024-04-29&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca';
     final response = await http.get(Uri.parse(uri));
 
     if (response.statusCode == 200) {
-      return News.fromJson(json.decode(response.body));
+      return Article.fromJson(json.decode(response.body));
     } else {
       throw 'error';
     }
   }
 }
 
-class News {
+class Article {
   final String status;
   final String author;
   final String title;
   final String description;
   final String image;
 
-  News(
+  Article(
       {required this.status,
       required this.author,
       required this.title,
       required this.description,
       required this.image});
 
-  factory News.fromJson(Map<String, dynamic> json) {
-    return News(
+  factory Article.fromJson(Map<String, dynamic> json) {
+    return Article(
         status: json['status'],
         author: json['author'],
         description: json['description'],
