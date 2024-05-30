@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-//screen
+//screens
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
 

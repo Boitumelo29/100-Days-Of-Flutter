@@ -45,11 +45,11 @@ List<Article> news = [];
         ),
         body: Center(
           child: ListView.builder(
-            itemCount:news.length,
-            itemBuilder:(context, index){
+            itemCount:news.lenght,
+            itemBuild:(context, index){
               return Column(children: <Widget>[
-                ListTile(title:Text(index.ti))
-              ]);
+                ListTile(title:Text(news.index.title))
+              ])
             }
           )
         ));
@@ -68,7 +68,9 @@ List<Article> news = [];
       } else {
         // "No articles found";
       }
-    
+    } else {
+      // 'error';
+    }
   }
 }
 
