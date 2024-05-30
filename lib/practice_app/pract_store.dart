@@ -27,6 +27,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Products> products = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // now we are initialing it
+    fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
     //fetchData();
@@ -40,6 +50,10 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       // we have to import the dart converter in order for us to use the json.decode and what this line is doing is it is decoding the response body and setting it to a list type
       List<dynamic> jsonData = json.decode(response.body);
+      // we are setting products to jsonData and at the same time setting jsonData to a list
+      setState(() {
+        products = jsonData.map((e) => Products.fromJson(e)).toList();
+      });
     }
   }
 }
