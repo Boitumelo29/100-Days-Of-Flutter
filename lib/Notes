@@ -38,3 +38,6 @@ async* gives you a stream
 The “final” keyword is used to declare variables whose values cannot be changed once assigned.
 
 The “const” keyword is used to declare variables that are compile-time constants. Unlike “final” variables, “const” variables must be assigned a value at the time of their declaration, and their value must be a compile-time constant.
+
+List<dynamic>: This defines a list in Dart that can hold elements of any type. The dynamic keyword indicates that the type of the elements is not specified and can be any type.
+In summary Dynamic  can hold any type of data

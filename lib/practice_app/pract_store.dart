@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,6 +29,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    //fetchData();
     return Scaffold();
   }
 
@@ -35,7 +38,8 @@ class _HomePageState extends State<HomePage> {
     final response = await http.get(Uri.parse(uri));
 
     if (response.statusCode == 200) {
-      print(response.body);
+      // we have to import the dart converter in order for us to use the json.decode and what this line is doing is it is decoding the response body and setting it to a list type
+      List<dynamic> jsonData = json.decode(response.body);
     }
   }
 }
