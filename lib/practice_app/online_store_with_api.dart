@@ -58,7 +58,7 @@ class _ProductScreenState extends State<ProductScreen> {
 }
 
 //model
-
+// here in this class we have created the model where we ill be pasting our api into
 class Product {
   final int id;
   final double price;
@@ -72,4 +72,13 @@ class Product {
       required this.title,
       required this.image,
       required this.description});
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+        id: json['id'],
+        price: json['price'].toDouble(),
+        title: json['title'],
+        image: json['image'],
+        description: json['description']);
+  }
 }
