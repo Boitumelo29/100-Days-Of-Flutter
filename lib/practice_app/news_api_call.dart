@@ -27,61 +27,52 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<Article> _futureNews;
+  //late Future<Article> _futureNews;
+List<Article> news = [];
 
   @override
   void initState() {
     super.initState();
     //here we are overring and initiaising _fetchNews to = _futureNews
-    _futureNews = _fetchNews();
+    _fetchNews();
   }
 
   @override
   Widget build(BuildContext context) {
-    _fetchNews();
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
         ),
         body: Center(
-          child: FutureBuilder<Article>(
-            future: _futureNews,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var article = snapshot.data!;
-                print("==============${article.title}");
-                return Column(
-                  children: <Widget>[Text(article.title)],
-                );
-              }
-              return const CircularProgressIndicator();
-            },
-          ),
+          child: ListView.builder(
+            itemCount:news.length,
+            itemBuilder:(context, index){
+              return Column(children: <Widget>[
+                ListTile(title:Text(index.ti))
+              ]);
+            }
+          )
         ));
   }
-
-  Future<Article> _fetchNews() async {
+//fetching the data
+  Future<void> _fetchNews() async {
     var uri =
         "https://newsapi.org/v2/everything?q=tesla&from=2024-04-30&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca";
     final response = await http.get(Uri.parse(uri));
     if (response.statusCode == 200) {
       //json.decode takes json formatted string and it converts it into dart
-      final jsonResponse = json.decode(response.body);
-      print("json response================${jsonResponse['articles']}");
-      print(
-          "json response for the first ================${jsonResponse['articles'][0]}");
-      if (jsonResponse['articles'] != null &&
-          jsonResponse['articles'].isNotEmpty) {
-        return Article.fromJson(jsonResponse['articles'][0]);
+      List<dynamic>jsonData = json.decode(response.body)
+      setState((){
+        news = jsonData.map((data)=> Article.fromJson(data)).toList();
+      });
       } else {
-        throw "No articles found";
+        // "No articles found";
       }
-    } else {
-      throw 'error';
-    }
+    
   }
 }
 
+//the model
 class Article {
   final String status;
   final String author;
