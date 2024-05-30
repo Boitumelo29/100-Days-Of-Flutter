@@ -43,15 +43,15 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Center(
-            child: ListView.builder(
-                itemCount: news.length,
-                itemBuilder: (context, index) {
-                  print(news);
-                  return Column(children: <Widget>[
-                    ListTile(title: Text(news[index].title))
-                  ]);
-                })));
+        body: ListView.builder(
+            itemCount: news.length,
+            itemBuilder: (context, index) {
+              print("Building item $index");
+              return Column(children: <Widget>[
+                ListTile(title: Text(news[index].author)),
+                Text("data"),
+              ]);
+            }));
   }
 
 //fetching the data
@@ -60,13 +60,14 @@ class _HomePageState extends State<HomePage> {
         "https://newsapi.org/v2/everything?q=tesla&from=2024-04-30&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca";
     final response = await http.get(Uri.parse(uri));
     if (response.statusCode == 200) {
-      //json.decode takes json formatted string and it converts it into dart
-      List<dynamic> jsonData = json.decode(response.body);
+      Map<String, dynamic> jsonData = json.decode(response.body);
+      List<dynamic> articles =
+          jsonData['articles']; // Assuming 'articles' is the key
       setState(() {
-        news = jsonData.map((data) => Article.fromJson(data)).toList();
+        news = articles.map((data) => Article.fromJson(data)).toList();
       });
     } else {
-      // "No articles found";
+      // Handle error or no articles found
     }
   }
 }
