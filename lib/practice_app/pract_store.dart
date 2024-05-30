@@ -49,14 +49,17 @@ class _HomePageState extends State<HomePage> {
             return SizedBox(
               height: 80,
               width: 80,
-              child: ListTile(
-                leading: SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: Image.network(products[index].image),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  leading: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Image.network(products[index].image),
+                  ),
+                  title: Text(products[index].title),
+                  subtitle: Text("R${products[index].price}"),
                 ),
-                title: Text(products[index].title),
-                subtitle: Text("R${products[index].price}"),
               ),
             );
           }),
