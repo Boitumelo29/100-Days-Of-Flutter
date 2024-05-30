@@ -64,6 +64,8 @@ class _HomePageState extends State<HomePage> {
     final response = await http.get(Uri.parse(uri));
 
     if (response.statusCode == 200) {
+      //json.decode takes json formatted string and it converts it into dart
+      final jsonResponse = json.decode(response.body);
       return Article.fromJson(json.decode(response.body));
     } else {
       throw 'error';
@@ -88,7 +90,7 @@ class Article {
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
         status: json['status'],
-        author: json['author'],
+        author: json['author'] ?? 'unknown',
         description: json['description'],
         title: json['title'],
         image: json['urlToImage']);
