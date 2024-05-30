@@ -55,9 +55,24 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
   //currently products is an empty list
   List<Product> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    //we inistialed fetch products
+    fetchProduct();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SingleChildScrollView(
+      child: ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          return ProductCard(product: products[index]);
+        },
+      ),
+    );
   }
 
   //function to fetch the api
@@ -72,7 +87,20 @@ class _ProductScreenState extends State<ProductScreen> {
         // we are seting proucts to the jsonData toList
         products = jsonData.map((data) => Product.fromJson(data)).toList();
       });
+    } else {
+      // final snacBarMessage = (content: const Text("An error has occured"));
+      // var SnackBar = ScaffoldMessenger(child: snacBarMessage);
     }
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final Product product;
+  const ProductCard({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
