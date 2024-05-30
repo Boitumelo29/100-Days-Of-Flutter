@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       body: ListView.builder(
           itemCount: products.length,
           itemBuilder: (context, index) {
-            if (products.isEmpty) {
+            if (products.isNotEmpty) {
               return SizedBox(
                 height: 80,
                 width: 80,
