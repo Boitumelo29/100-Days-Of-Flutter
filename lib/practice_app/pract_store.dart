@@ -8,8 +8,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,
-    home: HomePage(title: title),);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(title: title),
+    );
   }
 }
 
@@ -28,4 +30,27 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+//The Model
+class Products {
+  final int id;
+  final double price;
+  final String title;
+  final String image;
+  final String description;
 
+  Products(
+      {required this.id,
+      required this.description,
+      required this.image,
+      required this.price,
+      required this.title});
+
+  factory Products.fromJson(Map<String, dynamic> json) {
+    return Products(
+        id: json['id'],
+        description: json['description'],
+        image: json['image'],
+        price: json['price'],
+        title: json['title']);
+  }
+}
