@@ -28,7 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //late Future<Article> _futureNews;
-List<Article> news = [];
+  List<Article> news = [];
 
   @override
   void initState() {
@@ -44,16 +44,16 @@ List<Article> news = [];
           title: Text(widget.title),
         ),
         body: Center(
-          child: ListView.builder(
-            itemCount:news.lenght,
-            itemBuilder:(context, index){
-              return Column(children: <Widget>[
-                ListTile(title:Text(news.index.title))
-              ])
-            }
-          )
-        ));
+            child: ListView.builder(
+                itemCount: news.length,
+                itemBuilder: (context, index) {
+                  print(news);
+                  return Column(children: <Widget>[
+                    ListTile(title: Text(news[index].title))
+                  ]);
+                })));
   }
+
 //fetching the data
   Future<void> _fetchNews() async {
     var uri =
@@ -61,13 +61,13 @@ List<Article> news = [];
     final response = await http.get(Uri.parse(uri));
     if (response.statusCode == 200) {
       //json.decode takes json formatted string and it converts it into dart
-      List<dynamic>jsonData = json.decode(response.body)
-      setState((){
-        news = jsonData.map((data)=> Article.fromJson(data)).toList();
+      List<dynamic> jsonData = json.decode(response.body);
+      setState(() {
+        news = jsonData.map((data) => Article.fromJson(data)).toList();
       });
-      } else {
-        // "No articles found";
-      }
+    } else {
+      // "No articles found";
+    }
   }
 }
 
