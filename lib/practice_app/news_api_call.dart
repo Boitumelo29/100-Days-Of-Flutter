@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[Text(snapshot.data!.title)],
                 );
               }
-              return Text(snapshot.data!.title);
+              return const CircularProgressIndicator();
             },
           ),
         ));
