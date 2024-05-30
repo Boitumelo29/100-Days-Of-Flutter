@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _fetchNews();
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -66,7 +67,13 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       //json.decode takes json formatted string and it converts it into dart
       final jsonResponse = json.decode(response.body);
-      return Article.fromJson(json.decode(response.body));
+      print(jsonResponse['articles']);
+      if (jsonResponse['articles'] != null &&
+          jsonResponse['articles'].isNotEmpty) {
+        return Article.fromJson(jsonResponse['articles'][0]);
+      } else {
+        throw "No articles found";
+      }
     } else {
       throw 'error';
     }
