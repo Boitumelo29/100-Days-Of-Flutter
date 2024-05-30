@@ -46,7 +46,7 @@ List<Article> news = [];
         body: Center(
           child: ListView.builder(
             itemCount:news.lenght,
-            itemBuild:(context, index){
+            itemBuilder:(context, index){
               return Column(children: <Widget>[
                 ListTile(title:Text(news.index.title))
               ])
@@ -68,9 +68,6 @@ List<Article> news = [];
       } else {
         // "No articles found";
       }
-    } else {
-      // 'error';
-    }
   }
 }
 
