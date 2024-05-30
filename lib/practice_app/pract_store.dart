@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(const MyApp());
 
@@ -27,6 +28,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();
+  }
+
+  Future<void> fetchData() async {
+    var uri = 'https://fakestoreapi.com/products';
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+    }
   }
 }
 
