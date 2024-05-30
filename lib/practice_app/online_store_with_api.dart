@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() => runApp(const MyApp());
 
@@ -51,9 +53,26 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  //currently products is an empty list
+  List<Product> products = [];
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
+  }
+
+  //function to fetch the api
+  Future<void> fetchProduct() async {
+    var uri = 'https://fakestoreapi.com/products';
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      //we are decoding the json response
+      List<dynamic> jsonData = json.decode(response.body);
+      setState(() {
+        // we are seting proucts to the jsonData toList
+        products = jsonData.map((data) => Product.fromJson(data)).toList();
+      });
+    }
   }
 }
 
