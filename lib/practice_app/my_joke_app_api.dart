@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,10 +37,14 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Future<void> fetchData() async {
+Future<Jokes> fetchData() async {
   var uri = "https://icanhazdadjoke.com/";
   final response = await http.get(Uri.parse(uri));
-  if (response.statusCode == 200) {}
+  if (response.statusCode == 200) {
+    return Jokes.fromJson(json.decode(response.body));
+  } else {
+    throw "An error has occured";
+  }
 }
 
 class Jokes {
