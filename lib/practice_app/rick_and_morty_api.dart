@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  final String title = "Rick And Mortey API Call";
+  final String title = "Rick And Morty API Call";
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +25,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
+    fetchData();
     return const Placeholder();
+  }
+
+  Future<void> fetchData() async{
+    var uri = "https://rickandmortyapi.com/api/character";
+    final response = await http.get(Uri.parse(uri));
+    print(response.body);
+    
   }
 }
 
 
 //The model
-
 class Character{
   final String id;
   final String name;
@@ -46,3 +54,6 @@ class Character{
     return Character(id: json['id'], name: json['name'], species: json['species'], image: json['image']);
   }
 }
+
+
+
