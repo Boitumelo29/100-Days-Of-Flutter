@@ -42,37 +42,52 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          width: 200,
-          height: 200,
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 178, 124, 187),
-              borderRadius: BorderRadius.circular(10)),
-          child: FutureBuilder(
-              future: fetchData(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Column(
-                    children: [
-                      Text(snapshot.data!.joke),
-                      ElevatedButton(
-                          onPressed: () {}, child: const Text("New Joke"))
-                    ],
-                  );
-                } else {
-                  return SkeletonAnimation(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(20)),
-                    ),
-                  );
-                }
-              }),
+        child: Expanded(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            width: 250,
+            height: 200,
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 178, 124, 187),
+                borderRadius: BorderRadius.circular(20)),
+            child: FutureBuilder(
+                future: fetchData(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        Text(snapshot.data!.joke),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              changeJoke();
+                            },
+                            child: const Text("New Joke"))
+                      ],
+                    );
+                  } else {
+                    return SkeletonAnimation(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 206, 166, 214),
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                    );
+                  }
+                }),
+          ),
         ),
       ),
     );
+  }
+
+  void changeJoke() {
+    setState(() {
+      build(context);
+    });
   }
 }
 
