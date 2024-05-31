@@ -29,6 +29,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      body: Container(),
     );
+  }
+}
+
+class Jokes {
+  final String joke;
+
+  Jokes({required this.joke});
+
+  factory Jokes.fromJson(Map<String, dynamic> json) {
+    return Jokes(joke: json['joke']);
   }
 }
