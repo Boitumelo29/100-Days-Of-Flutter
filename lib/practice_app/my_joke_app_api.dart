@@ -47,7 +47,8 @@ class _HomePageState extends State<HomePage> {
           width: 200,
           height: 200,
           decoration: BoxDecoration(
-              color: Colors.grey[300], borderRadius: BorderRadius.circular(10)),
+              color: const Color.fromARGB(255, 178, 124, 187),
+              borderRadius: BorderRadius.circular(10)),
           child: FutureBuilder(
               future: fetchData(),
               builder: (context, snapshot) {
@@ -55,7 +56,8 @@ class _HomePageState extends State<HomePage> {
                   return Column(
                     children: [
                       Text(snapshot.data!.joke),
-                      ElevatedButton(onPressed: () {}, child: Text("New Joke"))
+                      ElevatedButton(
+                          onPressed: () {}, child: const Text("New Joke"))
                     ],
                   );
                 } else {
