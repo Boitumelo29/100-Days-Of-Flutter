@@ -25,6 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    fetchData();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -32,6 +33,12 @@ class _HomePageState extends State<HomePage> {
       body: Container(),
     );
   }
+}
+
+Future<void> fetchData() async {
+  var uri = "https://icanhazdadjoke.com/";
+  final response = await http.get(Uri.parse(uri));
+  if (response.statusCode == 200) {}
 }
 
 class Jokes {
