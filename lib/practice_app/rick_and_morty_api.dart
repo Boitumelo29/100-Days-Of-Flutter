@@ -37,6 +37,12 @@ class _HomePageState extends State<HomePage> {
 class Character{
   final String id;
   final String name;
-  final String species
-  final String 
+  final String species;
+  final String image;
+
+  Character({required this.id, required this.name, required this.species, required this.image});
+
+  factory Character.fromJson(Map<String, dynamic>json){
+    return Character(id: json['id'], name: json['name'], species: json['species'], image: json['image']);
+  }
 }
