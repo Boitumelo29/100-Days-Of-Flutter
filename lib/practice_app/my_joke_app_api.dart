@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:skeleton_text/skeleton_text.dart';
 
 void main() => runApp(const MyApp());
 
@@ -52,10 +53,19 @@ class _HomePageState extends State<HomePage> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Column(
-                    children: [Text(snapshot.data!.joke)],
+                    children: [
+                      Text(snapshot.data!.joke),
+                      ElevatedButton(onPressed: () {}, child: Text("New Joke"))
+                    ],
                   );
                 } else {
-                  return const CircularProgressIndicator();
+                  return SkeletonAnimation(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  );
                 }
               }),
         ),
