@@ -27,13 +27,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+     List<Character> characters = [];
   @override
   Widget build(BuildContext context) {
-    List<Character> chracters = [];
 
     @override
-    initState() {
+    void initState() {
       super.initState();
+      // now we are initialing it
       fetchData();
     }
 
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       List<dynamic> jsonData = json.decode(response.body);
       setState(() {
-        hracters = jsonData.map((e) => Character.fromJson(e)).toList();
+        characters = jsonData.map((e) => Character.fromJson(e)).toList();
       });
     }
   }
