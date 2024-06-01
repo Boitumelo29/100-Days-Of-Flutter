@@ -27,29 +27,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-     List<Character> characters = [];
-     @override
-     void initState() {
-       super.initState();
-       // now we are initialing it
-       fetchData();
-     }
+  List<Character> characters = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // now we are initialing it
+    fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(itemCount:characters.length , itemBuilder: (context, index){
-       if(characters.isNotEmpty){
-         return ListTile(title: Text(characters[index].name));
-       }else{
-         Text("no data");
-       }
-
-      }),
+      body: ListView.builder(
+          itemCount: characters.length,
+          itemBuilder: (context, index) {
+            if (characters.isNotEmpty) {
+              return ListTile(title: Text(characters[index].name));
+            } else {
+              Text("no data");
+            }
+            return CircularProgressIndicator();
+          }),
     );
   }
 
@@ -59,10 +61,18 @@ class _HomePageState extends State<HomePage> {
         await http.get(Uri.https('rickandmortyapi.com', 'api/character'));
     print("my call ${response.body}");
     if (response.statusCode == 200) {
-      List<dynamic> jsonData = json.decode(response.body);
+      Map<String, dynamic> jsonData = json.decode(response.body);
+      List<dynamic> charactersData = jsonData[
+          'results']; // Access the 'results' key which contains the list of characters
       setState(() {
-        characters = jsonData.map((e) => Character.fromJson(e)).toList();
+        characters = charactersData.map((e) => Character.fromJson(e)).toList();
       });
+      // List<dynamic> jsonData = json.decode(response.body);
+      // Map<String, dynamic> jsonData = json.decode(response.body);
+      // List<dynamic> charactersData = jsonData['results'];
+      // setState(() {
+      //   characters = jsonData.map((e) => Character.fromJson(e)).toList();
+      // });
     }
   }
 }
