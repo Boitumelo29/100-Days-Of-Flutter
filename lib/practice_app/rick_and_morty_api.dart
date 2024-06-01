@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
           itemCount: characters.length,
           itemBuilder: (context, index) {
             if (characters.isNotEmpty) {
+              print(characters[index].name);
               return ListTile(title: Text(characters[index].name));
             } else {
               Text("no data");
@@ -79,22 +80,14 @@ class _HomePageState extends State<HomePage> {
 
 //The model
 class Character {
-  final String id;
   final String name;
   final String species;
   final String image;
 
-  Character(
-      {required this.id,
-      required this.name,
-      required this.species,
-      required this.image});
+  Character({required this.name, required this.species, required this.image});
 
   factory Character.fromJson(Map<String, dynamic> json) {
     return Character(
-        id: json['id'],
-        name: json['name'],
-        species: json['species'],
-        image: json['image']);
+        name: json['name'], species: json['species'], image: json['image']);
   }
 }
