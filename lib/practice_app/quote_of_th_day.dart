@@ -28,3 +28,16 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+//the model
+
+class QuoteOfThDay {
+  final String author;
+  final String body;
+
+  QuoteOfThDay({required this.author, required this.body});
+
+  factory QuoteOfThDay.fromJson(Map<String, dynamic> json) {
+    return QuoteOfThDay(author: json['author'], body: json['body']);
+  }
+}
