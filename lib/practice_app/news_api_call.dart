@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   final String title;
+
   const HomePage({super.key, required this.title});
 
   @override
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _fetchNews();
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -46,23 +48,23 @@ class _HomePageState extends State<HomePage> {
         body: ListView.builder(
             itemCount: news.length,
             itemBuilder: (context, index) {
-              print("Building item $index");
               return Column(children: <Widget>[
                 ListTile(title: Text(news[index].author)),
-                Text("data"),
               ]);
             }));
   }
 
 //fetching the data
   Future<void> _fetchNews() async {
+    final responsed =
+        await http.get(Uri.https('rickandmortyapi.com', 'api/character'));
+
     var uri =
-        "https://newsapi.org/v2/everything?q=tesla&from=2024-04-30&sortBy=publishedAt&apiKey=7ba67c0508f34c7981013a3fef187aca";
+        "https://newsapi.org/v2/everything?q=apple&from=2024-05-31&to=2024-05-31&sortBy=popularity&apiKey=7ba67c0508f34c7981013a3fef187aca";
     final response = await http.get(Uri.parse(uri));
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = json.decode(response.body);
-      List<dynamic> articles =
-          jsonData['articles']; // Assuming 'articles' is the key
+      List<dynamic> articles = jsonData['articles'];
       setState(() {
         news = articles.map((data) => Article.fromJson(data)).toList();
       });
@@ -74,25 +76,25 @@ class _HomePageState extends State<HomePage> {
 
 //the model
 class Article {
-  final String status;
   final String author;
   final String title;
-  final String description;
-  final String image;
 
-  Article(
-      {required this.status,
-      required this.author,
-      required this.title,
-      required this.description,
-      required this.image});
+  // final String description;
+  // final String image;
+
+  Article({
+    required this.author,
+    required this.title,
+    // required this.description,
+    // required this.image
+  });
 
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
-        status: json['status'],
-        author: json['author'] ?? 'unknown',
-        description: json['description'],
-        title: json['title'],
-        image: json['urlToImage']);
+      author: json['author'] ?? 'unknown',
+      // description: json['description'],
+      title: json['title'],
+      // image: json['urlToImage']
+    );
   }
 }
