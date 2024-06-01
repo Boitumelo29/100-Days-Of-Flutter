@@ -46,12 +46,15 @@ class _HomePageState extends State<HomePage> {
           itemCount: characters.length,
           itemBuilder: (context, index) {
             if (characters.isNotEmpty) {
-              print(characters[index].name);
-              return ListTile(title: Text(characters[index].name));
+              return ListTile(
+                subtitle: Text(characters[index].species),
+                leading: Image.network(characters[index].image),
+                title: Text(characters[index].name),
+              );
             } else {
-              Text("no data");
+              const Text("no data");
             }
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }),
     );
   }
@@ -60,20 +63,12 @@ class _HomePageState extends State<HomePage> {
     var uri = "https://rickandmortyapi.com/api";
     final response =
         await http.get(Uri.https('rickandmortyapi.com', 'api/character'));
-    print("my call ${response.body}");
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = json.decode(response.body);
-      List<dynamic> charactersData = jsonData[
-          'results']; // Access the 'results' key which contains the list of characters
+      List<dynamic> charactersData = jsonData['results'];
       setState(() {
         characters = charactersData.map((e) => Character.fromJson(e)).toList();
       });
-      // List<dynamic> jsonData = json.decode(response.body);
-      // Map<String, dynamic> jsonData = json.decode(response.body);
-      // List<dynamic> charactersData = jsonData['results'];
-      // setState(() {
-      //   characters = jsonData.map((e) => Character.fromJson(e)).toList();
-      // });
     }
   }
 }
