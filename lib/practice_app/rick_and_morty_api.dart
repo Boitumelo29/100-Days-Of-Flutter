@@ -37,12 +37,18 @@ class _HomePageState extends State<HomePage> {
       // now we are initialing it
       fetchData();
     }
-
-    fetchData();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      body: ListView.builder(itemCount:characters.length , itemBuilder: (context, snapshot){
+       if(characters.isNotEmpty){
+         ListTile(title: Text("characters[snapshot].name"));
+       }else{
+         Text("no data");
+       }
+
+      }),
     );
   }
 
