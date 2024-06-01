@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -29,15 +32,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     fetchData();
-    return const Placeholder();
+    return Scaffold(appBar: AppBar(title: Text(widget.title),),);
   }
 
   Future<void> fetchData() async{
-    var uri = "https://rickandmortyapi.com/api/character";
-    final response = await http.get(Uri.parse(uri));
-    print(response.body);
+    var uri = "https://rickandmortyapi.com/api";
+    final response =
+    await http.get(Uri.https('rickandmortyapi.com', 'api/character'));
+    print("my call ${response.body}");
+
+   // if(response){}
     
   }
+
+
+
 }
 
 
