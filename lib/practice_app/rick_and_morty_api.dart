@@ -13,14 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(title: title)
-    );
+        debugShowCheckedModeBanner: false, home: HomePage(title: title));
   }
 }
 
 class HomePage extends StatefulWidget {
   final String title;
+
   const HomePage({super.key, required this.title});
 
   @override
@@ -28,41 +27,56 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
+    List<Character> chracters = [];
+
+    @override
+    initState() {
+      super.initState();
+      fetchData();
+    }
+
     fetchData();
-    return Scaffold(appBar: AppBar(title: Text(widget.title),),);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+    );
   }
 
-  Future<void> fetchData() async{
+  Future<void> fetchData() async {
     var uri = "https://rickandmortyapi.com/api";
     final response =
-    await http.get(Uri.https('rickandmortyapi.com', 'api/character'));
+        await http.get(Uri.https('rickandmortyapi.com', 'api/character'));
     print("my call ${response.body}");
-
-   // if(response){}
-    
+    if (response.statusCode == 200) {
+      List<dynamic> jsonData = json.decode(response.body);
+      setState(() {
+        hracters = jsonData.map((e) => Character.fromJson(e)).toList();
+      });
+    }
   }
-
-
-
 }
 
-
 //The model
-class Character{
+class Character {
   final String id;
   final String name;
   final String species;
   final String image;
 
-  Character({required this.id, required this.name, required this.species, required this.image});
+  Character(
+      {required this.id,
+      required this.name,
+      required this.species,
+      required this.image});
 
-  factory Character.fromJson(Map<String, dynamic>json){
-    return Character(id: json['id'], name: json['name'], species: json['species'], image: json['image']);
+  factory Character.fromJson(Map<String, dynamic> json) {
+    return Character(
+        id: json['id'],
+        name: json['name'],
+        species: json['species'],
+        image: json['image']);
   }
 }
-
-
-
