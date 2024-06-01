@@ -49,16 +49,16 @@ class _HomePageState extends State<HomePage> {
             itemCount: news.length,
             itemBuilder: (context, index) {
               return Column(children: <Widget>[
-                ListTile(title: Text(news[index].author)),
+                ListTile(
+                  title: Text(news[index].author),
+                  subtitle: Text(news[index].description),
+                ),
               ]);
             }));
   }
 
 //fetching the data
   Future<void> _fetchNews() async {
-    final responsed =
-        await http.get(Uri.https('rickandmortyapi.com', 'api/character'));
-
     var uri =
         "https://newsapi.org/v2/everything?q=apple&from=2024-05-31&to=2024-05-31&sortBy=popularity&apiKey=7ba67c0508f34c7981013a3fef187aca";
     final response = await http.get(Uri.parse(uri));
@@ -68,9 +68,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         news = articles.map((data) => Article.fromJson(data)).toList();
       });
-    } else {
-      // Handle error or no articles found
-    }
+    } else {}
   }
 }
 
@@ -78,21 +76,21 @@ class _HomePageState extends State<HomePage> {
 class Article {
   final String author;
   final String title;
+  final String description;
 
-  // final String description;
   // final String image;
 
   Article({
     required this.author,
     required this.title,
-    // required this.description,
+    required this.description,
     // required this.image
   });
 
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
       author: json['author'] ?? 'unknown',
-      // description: json['description'],
+      description: json['description'] ?? 'unavailable',
       title: json['title'],
       // image: json['urlToImage']
     );
