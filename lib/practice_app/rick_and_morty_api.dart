@@ -28,22 +28,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
      List<Character> characters = [];
+     @override
+     void initState() {
+       super.initState();
+       // now we are initialing it
+       fetchData();
+     }
   @override
   Widget build(BuildContext context) {
 
-    @override
-    void initState() {
-      super.initState();
-      // now we are initialing it
-      fetchData();
-    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(itemCount:characters.length , itemBuilder: (context, snapshot){
+      body: ListView.builder(itemCount:characters.length , itemBuilder: (context, index){
        if(characters.isNotEmpty){
-         ListTile(title: Text("characters[snapshot].name"));
+         return ListTile(title: Text(characters[index].name));
        }else{
          Text("no data");
        }
