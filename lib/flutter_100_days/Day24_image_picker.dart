@@ -39,10 +39,12 @@ class _HomePageState extends State<HomePage> {
       body: Builder(
         builder: (BuildContext context) {
           return Center(
-            child: Column(
-              children: [Container()],
-            ),
-          )
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                ElevatedButton(
+                    onPressed: () {}, child: const Text("Select Image")),
+              ]));
         },
       ),
     );
