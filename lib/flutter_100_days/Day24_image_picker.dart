@@ -39,14 +39,33 @@ class _HomePageState extends State<HomePage> {
       body: Builder(
         builder: (BuildContext context) {
           return Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 ElevatedButton(
-                    onPressed: () {}, child: const Text("Select Image")),
-              ]));
+                  onPressed: () {},
+                  child: const Text("Select Image"),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 200,
+                  width: 300,
+                )
+              ],
+            ),
+          );
         },
       ),
     );
+  }
+
+  void _showPicker(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(child: Wrap());
+        });
   }
 }
