@@ -65,7 +65,32 @@ class _HomePageState extends State<HomePage> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return SafeArea(child: Wrap());
+          return SafeArea(
+              child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Photo Library"),
+                onTap: () {
+                  getImage(ImageSource.gallery);
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          ));
         });
+  }
+
+  Future getImage(ImageSource img) async {
+    final pickedFile = await picker.pickImage(source: img);
+    XFile? xfilePick = pickedFile;
+    setState(() {
+      if (xfilePick != null) {
+        galleryFile = File(pickedFile!.path);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("error")));
+      }
+    });
   }
 }
