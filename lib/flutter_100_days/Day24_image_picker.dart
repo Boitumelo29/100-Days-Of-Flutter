@@ -43,16 +43,24 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _showPicker(context);
+                  },
                   child: const Text("Select Image"),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 SizedBox(
-                  height: 200,
-                  width: 300,
-                )
+                    height: 200,
+                    width: 300,
+                    child: galleryFile == null
+                        ? const Center(
+                            child: Text("nothing to show"),
+                          )
+                        : Center(
+                            child: Image.file(galleryFile!),
+                          ))
               ],
             ),
           );
