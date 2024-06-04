@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(const MyApp());
 
@@ -24,11 +27,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  File? galleryFile;
+  final picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+      ),
+      body: Builder(
+        builder: (BuildContext context) {
+          return Center(
+            child: Column(
+              children: [Container()],
+            ),
+          )
+        },
       ),
     );
   }
