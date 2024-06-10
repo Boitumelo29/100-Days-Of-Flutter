@@ -27,12 +27,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var jsonList;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      body: ListView.builder(itemBuilder: (context, index) {}),
     );
+  }
+
+  void getData() async {
+    try {
+      var response = await Dio().get('rickandmortyapi.com/api/character');
+      if(response.statusCode == 200){
+        
+      }
+      // final response = "";
+    } catch (e) {
+      print(e);
+    }
   }
 }
