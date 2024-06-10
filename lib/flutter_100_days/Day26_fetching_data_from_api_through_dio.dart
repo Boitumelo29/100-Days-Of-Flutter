@@ -29,11 +29,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
     );
+  }
+
+  void getData() async {
+    try {
+      var response = await Dio().get('https://protocoderspoint.com/jsondata/superheros.json');
+    } catch (e) {
+      print(e);
+    }
   }
 }
