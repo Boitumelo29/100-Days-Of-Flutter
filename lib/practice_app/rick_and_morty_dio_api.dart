@@ -42,17 +42,19 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: ListView.builder(
-          itemCount: jsonList == null ? 0 : jsonList.lenght,
+          itemCount: jsonList.length,
           itemBuilder: (context, index) {
-            if(index == null){
-              return ListTile(
-                leading: Image.network(jsonList[index]['image']),
-                title: Text(jsonList[index]['name']),
-                subtitle: Text(jsonList[index]['species']),
-              );
-            }
-            return const CircularProgressIndicator();
-          }),
+          //   if(index == null){
+          //
+          //   }
+          //   return const CircularProgressIndicator();
+            return ListTile(
+              leading: Image.network(jsonList[index]['image']),
+              title: Text(jsonList[index]['name']),
+              subtitle: Text(jsonList[index]['species']),
+            );
+           }
+          ),
     );
   }
 
