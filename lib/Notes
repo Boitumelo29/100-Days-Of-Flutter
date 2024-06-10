@@ -28,11 +28,11 @@ to duplicate: press option, shift and down
 
 **void main defines the main() method that will run automatically, when the application is launched.
 
-The diffence between async and async*
+The difference between async and async*
  async is for functions that perform asynchronous operations and return a single result, while async* is for functions that generate multiple results over time in an asynchronous manner
 
 Short Answer:
-async gives you a futer
+async gives you a future
 async* gives you a stream
 
 The “final” keyword is used to declare variables whose values cannot be changed once assigned.
@@ -41,3 +41,6 @@ The “const” keyword is used to declare variables that are compile-time const
 
 List<dynamic>: This defines a list in Dart that can hold elements of any type. The dynamic keyword indicates that the type of the elements is not specified and can be any type.
 In summary Dynamic  can hold any type of data
+
+
+some more documentation on dio can be found here: https://www.scaler.com/topics/dio-flutter/
