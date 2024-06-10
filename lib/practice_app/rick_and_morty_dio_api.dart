@@ -41,15 +41,30 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {}),
+      body: ListView.builder(
+          itemCount: jsonList == null ? 0 : jsonList.lenght,
+          itemBuilder: (context, index) {
+            if(index == null){
+              return ListTile(
+                leading: Image.network(jsonList[index]['image']),
+                title: Text(jsonList[index]['name']),
+                subtitle: Text(jsonList[index]['species']),
+              );
+            }
+            return const CircularProgressIndicator();
+          }),
     );
   }
 
   void getData() async {
     try {
-      var response = await Dio().get('rickandmortyapi.com/api/character');
-      if(response.statusCode == 200){
-        
+      var response = await Dio().get('https://rickandmortyapi.com/api/character');
+      if (response.statusCode == 200) {
+        setState(() {
+          jsonList = response.data['results'] as List;
+        });
+      } else {
+        print(response.statusCode);
       }
       // final response = "";
     } catch (e) {
