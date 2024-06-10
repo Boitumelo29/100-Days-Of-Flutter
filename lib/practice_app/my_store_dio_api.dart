@@ -6,7 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  final String title = "";
+  final String title = "My Store";
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +42,29 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: ListView.builder(itemBuilder: (context, index) {
-        return ListTile();
+        return ListTile(
+          leading: ClipRRect(
+            child: Image.network(
+              jsonList[index]['image'],
+              width: 50,
+              height: 50,
+              fit: BoxFit.fill,
+            ),
+          ),
+          title: Text(jsonList[index]['title']),
+          subtitle: Text(jsonList[index]['price']),
+        );
       }),
     );
   }
 
   void getData() async {
     try {
-      var response = await Dio().get("");
+      var response = await Dio().get("'https://fakestoreapi.com/products");
 
       if (response.statusCode == 200) {
         setState(() {
-          jsonList = response.data[''] as List;
+          jsonList = response.data['products'] as List;
         });
       } else {
         print(response.statusCode);
