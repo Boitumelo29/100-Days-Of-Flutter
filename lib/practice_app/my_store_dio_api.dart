@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var jsonList;
+  List jsonList = [];
 
   @override
   void initState() {
@@ -41,30 +41,34 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {
-        return ListTile(
-          leading: ClipRRect(
-            child: Image.network(
-              jsonList[index]['image'],
-              width: 50,
-              height: 50,
-              fit: BoxFit.fill,
-            ),
-          ),
-          title: Text(jsonList[index]['title']),
-          subtitle: Text(jsonList[index]['price']),
-        );
-      }),
+      body: jsonList.isEmpty
+          ? const CircularProgressIndicator()
+          : ListView.builder(
+              itemCount: jsonList.length,
+              itemBuilder: (context, snapshot) {
+                return ListTile(
+                  leading: ClipRRect(
+                    child: Image.network(
+                      jsonList[snapshot]['image'],
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  title: Text(jsonList[snapshot]['title']),
+                  subtitle: Text("R${jsonList[snapshot]['price']}"),
+                );
+              }),
     );
   }
 
   void getData() async {
     try {
-      var response = await Dio().get("'https://fakestoreapi.com/products");
+      var response = await Dio().get("https://fakestoreapi.com/products");
 
       if (response.statusCode == 200) {
         setState(() {
-          jsonList = response.data['products'] as List;
+          jsonList = response.data as List;
         });
       } else {
         print(response.statusCode);
