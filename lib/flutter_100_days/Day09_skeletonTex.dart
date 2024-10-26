@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 void main() => runApp(const MyApp());
